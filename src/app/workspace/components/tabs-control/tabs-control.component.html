@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+  <div class="form__title">Title:</div>
+  <input [(ngModel)]="tabModel.title" formControlName="title" >
+  <br>
+  <div class="form__title">Content:</div>
+  <textarea [(ngModel)]="tabModel.content" formControlName="content" ></textarea>
+  <br>
+  <button (click)="addTabHandler()" [disabled]="disabledButton">
+    Add tab
+  </button>
+</form>
+
+<br>
+<tabs>
+  <tab *ngFor="let tab of tabs" [active]="tab.active" >
+    <tab-title (click)="titleClickHandler($event, tab)">
+      <div class="flex">
+        <p>title-{{ tab.title }}</p>
+        <button class="button__delete" (click)="removeTabHandler(tab.index)">x</button>
+      </div>
+    </tab-title>
+    <tab-content *ngIf="tab.active">
+      <div class="flex">
+        content-{{ tab.content }}
+      </div>
+    </tab-content>
+    <br>
+  </tab>
+</tabs>
